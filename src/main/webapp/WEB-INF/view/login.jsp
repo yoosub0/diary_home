@@ -46,11 +46,11 @@
             <form id="login" method="post" action="${pageContext.request.contextPath}/login">
                 <div class="form-group">
                     <label for="memberId">아이디</label>
-                    <input type="text" class="form-control" id="memberId" name="memberId" required>
+                    <input type="text" class="form-control" id="memberId" name="memberId" value="admin" required>
                 </div>
                 <div class="form-group">
                     <label for="memberPw">비밀번호</label>
-                    <input type="password" class="form-control" id="memberPw" name="memberPw" required>
+                    <input type="password" class="form-control" id="memberPw" name="memberPw" value="1234" required>
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">로그인</button>

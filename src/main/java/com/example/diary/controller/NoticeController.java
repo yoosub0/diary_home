@@ -1,5 +1,7 @@
 package com.example.diary.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,6 +53,18 @@ public class NoticeController {
 		return "addComment";
 	}
 	
+	@PostMapping("/addComment")
+	public String addComment(Model model, Comment comment, Notice notice, HttpSession session) {
+		int row = noticeService.addComment(comment);
+		if(row==0) {
+			System.out.println("업데이트 실패");
+			return "redirect:/addComment?noticeNo="+notice.getNoticeNo();
+		} else {
+			System.out.println("업데이트 성공");
+		}
+		return "redirect:/noticeOne?noticeNo="+notice.getNoticeNo();
+	}
+	
 	
 	@GetMapping("/deleteNotice")
 	public String deleteNotice(HttpSession session, Model model, Notice notice) {
@@ -80,11 +94,7 @@ public class NoticeController {
 		return "redirect:/noticeList";
 }
 
-    @GetMapping("/noticeList")
-    public String noticeList(Model model,
-                             @RequestParam(defaultValue = "1") int currentPage) {
-        return noticeService.noticeList(model, currentPage);
-    }
+
     
     @GetMapping("/noticeOne")
     public String noticeOne(Model model, Notice notice, Comment comment) {
@@ -111,5 +121,23 @@ public class NoticeController {
 
 		session.invalidate();
 		return "redirect:/login";
+	}
+	
+    @GetMapping("/noticeList")
+    public String noticeList(Model model,
+                             @RequestParam(defaultValue = "1") int currentPage) {
+        return noticeService.noticeList(model, currentPage);
+    }
+	
+	@PostMapping("/noticeList")
+	public  String searchNotice(Model model, Notice notice, @RequestParam(defaultValue = "1") int currentPage) {
+		List<Notice> list = noticeService.searchNotice(notice, currentPage);
+		System.out.println(list+"<--list");
+		int lastPage = noticeService.searchLastPage(notice);
+		model.addAttribute("list", list);
+		model.addAttribute("lastPage", lastPage);
+		model.addAttribute("currentPage", currentPage);
+		System.out.println(list+"lastpppp");
+		return "noticeList";
 	}
 }

@@ -14,6 +14,7 @@
 
         <form id="addComment" method="post" action="${pageContext.request.contextPath}/addComment">
 			<input type="hidden" id="noticeNo" name="noticeNo" value="${resultNotice.noticeNo}">
+			<input type="hidden" id="memberId" name="memberId" value="${loginMember.memberId}">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label">제목</label>
                 <div class="col-sm-10">
@@ -32,8 +33,6 @@
             <label for="comment">댓글</label>
             <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
         </div>
-        
-            </div>
 
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">

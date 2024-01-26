@@ -96,7 +96,7 @@ public class MemberController {
 		if(loginMember == null) {
 			return "redirect:/login";
 		}
-
+		model.addAttribute("memberNo", member.getMemberNo());
 		return "/deleteMember";
 	}
 	

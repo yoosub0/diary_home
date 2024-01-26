@@ -88,7 +88,7 @@ public class ScheduleService {
 			paraMap.put("year", Year);
 			paraMap.put("month", Month);
 			paraMap.put("day", Day);
-			paraMap.put("memberId", memberId);
+			paraMap.put("memberId", memberId);   
 		
 		List<Map<String, Object>> list = scheduleMapper.selectScheduleByDay(paraMap);
 		System.out.println(list + "<--hi");

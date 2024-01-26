@@ -51,6 +51,25 @@
 			<td><a href="${pageContext.request.contextPath}/addNotice" class="btn btn-outline-primary krFont">공지 추가</a></td>
 		</tr>
 	</table>
+				
+<div class="row">
+    <div class="col-xs-12 col-md-8"></div> <!-- 왼쪽 영역 -->
+    
+    <div class="col-xs-12 col-md-4">
+        <div class="input-group input-group-sm hidden-xs" style="width: 300px;">
+            <form class="search-form" id="searchNotice" name="searchNotice" method="post" action="${pageContext.request.contextPath}/noticeList">
+                <div class="input-group input-group-sm hidden-xs">
+                    <input type="text" name="noticeTitle" class="form-control pull-right" placeholder="제목을 입력해주세요" onfocus="this.placeholder=''" onblur="this.placeholder='제목을 입력하세요'">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn-outline-primary">검색</button>
+                    </span>	
+                </div>
+            </form>
+        </div>
+    </div> <!-- 오른쪽 영역 -->
+</div>
+
+		        	
 	
     <table class="table text-center">
         <thead class="table-primary h5 krFont">
@@ -61,7 +80,7 @@
             </tr>
         </thead>
         <tbody class="krFont">
-            <c:forEach var="n" items="${noticeList}">
+            <c:forEach var="n" items="${list}">
                 <tr>
                     <td>${n.noticeNo}</td>
                     <td>

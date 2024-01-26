@@ -27,4 +27,8 @@ public interface NoticeMapper {
 	int addComment(Comment comment);
 	
 	Comment selectComment(Comment comment);
+	
+	List<Notice> searchNotice (Map<String, Object> param);
+	
+	int getTotalRow2(Notice notice);
 }

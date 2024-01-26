@@ -77,4 +77,26 @@ public class NoticeService {
 		return "noticeList";
 	}
 
+	public List<Notice> searchNotice(Notice notice, int currentPage) {
+		int rowPerPage = 5;
+		int beginRow = (currentPage-1)*rowPerPage;
+		Map<String,Object> map = new HashMap<>();
+		map.put("beginRow", beginRow);
+		map.put("rowPerPage", rowPerPage);
+		map.put("noticeTitle", notice.getNoticeTitle());
+		
+		List<Notice> list = noticeMapper.searchNotice(map);
+		return list;
+		
+	}
+	public int searchLastPage(Notice notice) {
+		int rowPerPage = 5;
+		int totalRow = noticeMapper.getTotalRow2(notice);
+		int lastPage = totalRow/rowPerPage;
+		if(totalRow % rowPerPage !=0) {
+			lastPage +=1;
+		}
+		return lastPage;	
+	}
+
 }

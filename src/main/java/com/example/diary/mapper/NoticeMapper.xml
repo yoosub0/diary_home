@@ -73,5 +73,29 @@
 		SELECT COUNT(*) 
 		FROM notice
 	</select>
+	
+	<select id="searchNotice" parameterType="java.util.Map" resultType="com.example.diary.vo.Notice">
+		SELECT
+			notice_no noticeNo,
+			notice_title noticeTitle,
+			createdate
+		FROM notice
+		WHERE notice_title LIKE CONCAT('%', #{noticeTitle}, '%')
+		ORDER BY notice_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="getTotalRow2" parameterType="com.example.diary.vo.Notice" resultType="int">
+		SELECT COUNT(*)
+		FROM notice
+		WHERE notice_title LIKE CONCAT('%', #{noticeTitle}, '%')
+	</select>
+	
+	<insert id="addComment">
+		INSERT INTO comment
+		(notice_no, member_id, comment, is_secret)
+		VALUES(#{noticeNo}, #{memberId}, #{comment}, 'N')
+	
+	</insert>
 
 </mapper> <!-- 인터페이스와 동일해야함 -->
