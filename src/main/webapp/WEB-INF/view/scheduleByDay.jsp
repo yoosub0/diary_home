@@ -42,13 +42,13 @@
         </table>
 
         <h1>일정 추가</h1>
-        <form id="insertSchedule" method="post" action="${pageContext.request.contextPath}/addSchedule">
+        <form id="insertSchedule" method="post" action="${pageContext.request.contextPath}/insertSchedule">
             <input type="hidden" name="targetY" value="${calendarMap.targetYear}">
             <input type="hidden" name="targetM" value="${calendarMap.targetM+1}">
             <input type="hidden" name="targetD" value="${calendarMap.targetD}">
             <input type="hidden" name="memberId" value="${loginMember}">
             <div class="mb-3">
-                <textarea class="form-control" rows="3" name="memo" id="memo"></textarea>
+                <textarea class="form-control" rows="3" name="scheduleMemo" id="scheduleMemo"></textarea>
             </div>
             <button class="btn btn-success" id="addBtn" type="submit">일정 추가</button>
           	<a class="btn btn-secondary" href="${pageContext.request.contextPath}/home">이전</a>

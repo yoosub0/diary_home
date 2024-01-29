@@ -88,13 +88,12 @@
 			member_id,
 			schedule_date,
 			schedule_memo,
-			schedule_emoji,
-			createdate
+			schedule_emoji
 		)	VALUES (
-			#{member_id},
-			#{schedule_date},
-			#{schedule_memo},
-			#{schedule_emoji},
+			#{memberId},
+			#{scheduleDate},
+			#{scheduleMemo},
+			#{scheduleEmoji}
 			NOW()
 		)
 	</insert>
