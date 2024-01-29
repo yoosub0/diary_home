@@ -96,13 +96,13 @@ public class ScheduleService {
 		return list;
 	}
 	
-    public int insertSchedule(int targetY, int targetM, int targetD, String memberId, String memo) {
-        LocalDate scheduleDate = LocalDate.of(targetY, targetM, targetD);
+    public int insertSchedule(int targetY, int targetM, int targetD, String memberId) {
+        LocalDate date = LocalDate.of(targetY, targetM, targetD);
+        String scheduleDate = date.toString();
 
         Schedule schedule = new Schedule();
         schedule.setScheduleDate(scheduleDate);
         schedule.setMemberId(memberId);
-        schedule.setScheduleMemo(memo);
 
         return scheduleMapper.insertSchedule(schedule);
     }
