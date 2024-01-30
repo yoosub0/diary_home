@@ -7,7 +7,7 @@ public class Comment {
 	private int commentNo;
 	private int noticeNo;
 	private String memberId;
-	private String comment;
+	private String commentContent;
 	private String createdate;
 	private String isSecret;
 	

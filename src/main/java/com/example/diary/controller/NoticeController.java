@@ -1,6 +1,8 @@
 package com.example.diary.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.diary.service.CommentService;
 import com.example.diary.service.NoticeService;
 import com.example.diary.vo.Comment;
 import com.example.diary.vo.Member;
@@ -20,6 +23,8 @@ import jakarta.servlet.http.HttpSession;
 public class NoticeController {
     @Autowired
     private NoticeService noticeService;
+    @Autowired
+    private CommentService commentService;
     
     @GetMapping("/updateNotice")
 	public String updateNotice(Notice notice, HttpSession session, Model model) {
@@ -93,16 +98,27 @@ public class NoticeController {
 	}
 		return "redirect:/noticeList";
 }
-
-
     
     @GetMapping("/noticeOne")
-    public String noticeOne(Model model, Notice notice, Comment comment) {
+    public String noticeOne(HttpSession session, Model model, Notice notice, Comment comment) {
+    	if(session.getAttribute("loginMember") == null) {
+    		return "redirect:/login";
+    	}
+    	Member loginMember = (Member)session.getAttribute("loginMember");
+    	
+    	System.out.println(notice);
     	Notice resultNotice = noticeService.noticeOne(notice);
-    	model.addAttribute("resultNotice", resultNotice);
-    	  System.out.println(resultNotice.getNoticeNo()+"<----getNoticeNo");
-    	  System.out.println(resultNotice.getNoticeTitle()+"<----getNoticeTitle");
-     	  
+    	System.out.println(resultNotice);
+    	
+     	Map<String, Object> map = new HashMap<>();
+     	map.put("paramNotice", notice);
+     	
+     	List<Comment> list = commentService.commentList(map);
+     	
+     	model.addAttribute("loginMember", loginMember);
+     	model.addAttribute("resultNotice", resultNotice);
+     	model.addAttribute("list", list);
+     	
     	  return "noticeOne";  
     }
     

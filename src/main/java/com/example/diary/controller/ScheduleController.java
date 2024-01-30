@@ -106,10 +106,10 @@ public class ScheduleController {
 	
 	@PostMapping("/insertSchedule")
 	public String insertSchedule(HttpSession session, int targetY, int targetM, int targetD, Schedule schedule) {
-		
+		System.out.println("ssss");
 		// service로 보낼 아이디
-		String memberId = ((Member)session.getAttribute("loginMember")).getMemberId();
-		int row = scheduleService.insertSchedule(targetY, targetM, targetD, memberId);
+		System.out.println("Hereeee"+schedule);
+		int row = scheduleService.insertSchedule(targetY, targetM, targetD, schedule );
 		if(row==0) {
 			System.out.println("추가 실패");
 			return "redirect:/scheduleByDay";

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.mapper.ScheduleMapper">
+	<select id="selectScheduleListByMonth" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT
+			DAY(schedule_date) scheduleDay,
+			COUNT(*) cnt,
+			GROUP_CONCAT(substr(schedule_memo,1,5) SEPARATOR ',\n') memo
+		FROM schedule
+		WHERE member_id = #{memberId} 
+		AND YEAR(schedule_date) = #{targetYear}
+		AND MONTH(schedule_date) = #{targetMonth}
+		GROUP BY schedule_date
+		ORDER BY schedule_date ASC
+	</select>
+	
+	<select id="selectScheduleListByDay" 
+			parameterType="com.example.diary.vo.Schedule" resultType="com.example.diary.vo.Schedule">
+		SELECT
+			schedule_no scheduleNo,
+			member_id memberId,
+			schedule_date scheduleDate,
+			schedule_memo scheduleMemo,
+			schedule_emoji scheduleEmoji,
+			createdate
+		FROM schedule
+		WHERE schedule_date = #{scheduleDate}
+		AND member_id = #{memberId}
+	</select>
+	
+	<select id="selectScheduleOne" parameterType="com.example.diary.vo.Schedule" resultType="com.example.diary.vo.Schedule">
+		SELECT
+			schedule_no scheduleNo,
+			member_id memberId,
+			schedule_date scheduleDate,
+			schedule_memo scheduleMemo,
+			schedule_emoji scheduleEmoji,
+			createdate
+		FROM schedule
+		WHERE schedule_no = #{scheduleNo}
+	</select>
+	
+	<insert id="insertSchedule" parameterType="com.example.diary.vo.Schedule">
+		INSERT INTO schedule(
+			member_id,
+			schedule_date,
+			schedule_memo,
+			schedule_emoji
+		) VALUES (
+			#{memberId},
+			#{scheduleDate},
+			#{scheduleMemo},
+			#{scheduleEmoji}
+		)
+	</insert>
+	
+	<update id="updateSchedule" parameterType="com.example.diary.vo.Schedule">
+		UPDATE schedule SET
+			schedule_date = #{scheduleDate},
+			schedule_memo = #{scheduleMemo},
+			schedule_emoji = #{scheduleEmoji}
+		WHERE schedule_no = ${scheduleNo}
+	</update>
+	
+	<delete id="deleteSchedule" parameterType="com.example.diary.vo.Schedule">
+		DELETE FROM schedule
+		WHERE schedule_no = ${scheduleNo}
+	</delete>
+	
+	<select id="selectScheduleListByWord" parameterType="java.util.Map" resultType="com.example.diary.vo.Schedule">
+		SELECT 
+			schedule_no scheduleNo,
+			member_id memberId,
+			schedule_date scheduleDate,
+			schedule_memo scheduleMemo,
+			schedule_emoji scheduleEmoji,
+			createdate
+		FROM schedule
+		<where>
+			member_id = #{memberId}
+			<if test="word != '' and word != null">
+				AND schedule_memo LIKE CONCAT('%',#{word},'%')
+			</if>
+		</where>
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="selectScheduleByWordCnt" parameterType="java.util.Map" resultType="Integer" >
+		SELECT
+			COUNT(schedule_no)
+		FROM schedule
+		<where>
+			member_id = #{memberId}
+			<if test="word != '' and word != null">
+				AND schedule_memo LIKE CONCAT('%',#{word},'%')
+			</if>
+		</where>
+	</select>
+	
+	<select id="selectScheduleMaxYear" resultType="Integer">
+		SELECT 
+			MAX(YEAR(schedule_date))
+		FROM schedule
+	</select>
+	
+	<select id="selectScheduleMinYear" resultType="Integer">
+		SELECT 
+			MIN(YEAR(schedule_date))
+		FROM schedule
+	</select>
+	
+	<select id="selectScheduleListByYMD" parameterType="java.util.Map" resultType="com.example.diary.vo.Schedule">
+		SELECT 
+			schedule_no scheduleNo,
+			member_id memberId,
+			schedule_date scheduleDate,
+			schedule_memo scheduleMemo,
+			schedule_emoji scheduleEmoji,
+			createdate
+		FROM schedule
+		<where>
+			member_id = #{memberId}
+			<choose>
+				<when test="year != null and month == null and date == null">
+					AND YEAR(schedule_date) = #{year}
+				</when>
+				<when test="year != null and month != null and date == null">
+					AND YEAR(schedule_date) = #{year}
+					AND MONTH(schedule_date) = #{month}
+				</when>
+				<when test="year != null and month != null and date != null">
+					AND YEAR(schedule_date) = #{year}
+					AND MONTH(schedule_date) = #{month}
+					AND DAY(schedule_date) = #{date}
+				</when>
+			</choose>
+		</where>
+		LIMIT #{beginRow},#{rowPerPage}
+	</select>
+	
+	<select id="selectScheduleByYMDCnt" parameterType="java.util.Map" resultType="Integer">
+		SELECT
+			COUNT(schedule_no) Cnt
+		FROM schedule
+		<where>
+			member_id = #{memberId}
+			<choose>
+				<when test="year != null and month == null and date == null">
+					AND YEAR(schedule_date) = #{year}
+				</when>
+				<when test="year != null and month != null and date == null">
+					AND YEAR(schedule_date) = #{year}
+					AND MONTH(schedule_date) = #{month}
+				</when>
+				<when test="year != null and month != null and date != null">
+					AND YEAR(schedule_date) = #{year}
+					AND MONTH(schedule_date) = #{month}
+					AND DATE(schedule_date) = #{date}
+				</when>
+			</choose>
+		</where>
+	</select>
+</mapper>

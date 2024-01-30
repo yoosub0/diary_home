@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.diary.mapper.NoticeMapper">
+	<select id="selectNoticeList" parameterType="java.util.Map" resultType="com.example.diary.vo.Notice">
+		SELECT
+			notice_no noticeNo,
+			member_id memberId,
+			notice_title noticeTitle
+		FROM notice
+		ORDER BY notice_no DESC
+		LIMIT #{beginRow}, #{rowPerPage}
+	</select>
+	
+	<select id="selectNoticeOne" parameterType="com.example.diary.vo.Notice" resultType="com.example.diary.vo.Notice">
+		SELECT
+			notice_no noticeNo,
+			member_id memberId,
+			notice_title noticeTitle,
+			notice_content noticeContent,
+			createdate
+		FROM notice
+		WHERE notice_no = #{noticeNo}
+	</select>
+	
+	<insert id="insertNotice" parameterType="com.example.diary.vo.Notice">
+		INSERT INTO notice(
+			member_id,
+			notice_title,
+			notice_content,
+			notice_pw
+		)VALUES(
+			#{memberId},
+			#{noticeTitle},
+			#{noticeContent},
+			PASSWORD(#{noticePw})
+		)
+	</insert>
+	
+	<select id="noticeCnt" resultType="Integer">
+		SELECT 
+			COUNT(*) Cnt
+		FROM notice
+	</select>
+	
+	<delete id="deleteNotice" parameterType="com.example.diary.vo.Notice">
+		DELETE FROM notice
+		WHERE notice_no = #{noticeNo}
+		AND notice_pw = PASSWORD(#{noticePw})
+	</delete>
+	
+	<delete id="deleteCommentByNotice" parameterType="com.example.diary.vo.Notice">
+		DELETE FROM comment
+		WHERE notice_no = #{noticeNo}
+	</delete>
+	
+	<update id="updateNotice" parameterType="com.example.diary.vo.Notice">
+		UPDATE notice SET
+			notice_title = #{noticeTitle},
+			notice_content = #{noticeContent}
+		WHERE notice_no = #{noticeNo}
+		AND notice_pw = PASSWORD(#{noticePw})
+	</update>
+</mapper>
