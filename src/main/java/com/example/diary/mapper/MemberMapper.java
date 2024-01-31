@@ -20,4 +20,7 @@ public interface MemberMapper {
  	
  	// 삭제
  	int deleteMember(Member member);
+ 	
+ 	// 아이디 중복 확인
+ 	int idCk (String memberId);
 }

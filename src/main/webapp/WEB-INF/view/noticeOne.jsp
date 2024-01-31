@@ -131,9 +131,9 @@
 				</table>
 			</div>
 		</div>
-		</div>
-		</div>
-		</div>
+	</div>
+	</div>
+</div>
 <!-- Add Bootstrap JS and Popper.js links (required for some Bootstrap features) -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

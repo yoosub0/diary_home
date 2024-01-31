@@ -50,27 +50,6 @@ public class NoticeController {
 		return "redirect:/noticeList";
 	}
 	
-	@GetMapping("/addComment")
-	public String addComment(Notice notice, Comment comment, HttpSession session, Model model) {
-		Notice resultNotice = noticeService.noticeOne(notice);
-		model.addAttribute("resultNotice", resultNotice);
-		// mapper 호출
-		return "addComment";
-	}
-	
-	@PostMapping("/addComment")
-	public String addComment(Model model, Comment comment, Notice notice, HttpSession session) {
-		int row = noticeService.addComment(comment);
-		if(row==0) {
-			System.out.println("업데이트 실패");
-			return "redirect:/addComment?noticeNo="+notice.getNoticeNo();
-		} else {
-			System.out.println("업데이트 성공");
-		}
-		return "redirect:/noticeOne?noticeNo="+notice.getNoticeNo();
-	}
-	
-	
 	@GetMapping("/deleteNotice")
 	public String deleteNotice(HttpSession session, Model model, Notice notice) {
 		if(session.getAttribute("loginMember")==null) {

@@ -66,6 +66,7 @@ public class CommentController {
 			System.out.println("수정 성공");
 		}
 		int noticeNo = comment.getNoticeNo();
+		System.out.println("noticeNOO"+noticeNo);
 		String u = "redirect:/noticeOne?noticeNo="+noticeNo;
 		return u;
 	}

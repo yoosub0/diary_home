@@ -37,4 +37,11 @@
 		WHERE member_no = #{memberNo}
 		AND member_pw = PASSWORD(#{memberPw})
 	</delete>
+	
+	<select id="idCk" parameterType="com.example.diary.vo.Member" resultType="int">
+		SELECT
+			COUNT(member_id)
+		FROM member
+		WHERE member_id = #{memberId}
+	</select>
 </mapper>

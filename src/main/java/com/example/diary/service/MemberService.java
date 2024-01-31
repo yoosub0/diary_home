@@ -33,4 +33,8 @@ public class MemberService {
 	public int deleteMember(Member paramMember) {
 		return memberMapper.deleteMember(paramMember);
 	}
+	
+	public int idCk(String memberId) {
+		return memberMapper.idCk(memberId);
+	}
 }

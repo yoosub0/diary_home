@@ -34,35 +34,32 @@
 </head>
 <body class="bg-light">
     <div class="container krFont insert-form">
-        <h1 class="mb-4">공지사항 수정</h1>
+        <h1 class="mb-4">공지사항 댓글 수정</h1>
 
-        <form id="updateNotice" method="post" action="${pageContext.request.contextPath}/updateNotice">
-			<input type="hidden" id="noticeNo" name="noticeNo" value="${resultNotice.noticeNo}">
+        <form id="updateNotice" method="post" action="${pageContext.request.contextPath}/updateComment">
             <div class="form-group row">
-                <label class="col-sm-2 col-form-label">제목</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle" value="${resultNotice.noticeTitle}">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">공지사항 내용</label>
-                <div class="col-sm-10">
-                    <textarea class="form-control" id="noticeContent" name="noticeContent" rows="10" cols="100">${resultNotice.noticeContent}</textarea>
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <label class="col-sm-2 col-form-label">PW</label>
-                <div class="col-sm-10">
-                    <input type="password" class="form-control" id="noticePw" name="noticePw">
-                </div>
-            </div>
-
-            <div class="form-group row">
-                <div class="col-sm-10 offset-sm-2">
+					<table class="table ">
+						<tr align="center">
+							<th>코멘트</th>
+							<td>
+								<textarea name="commentContent" cols="50" id="commentContent">${originComment.commentContent}</textarea>
+							</td>
+						</tr>
+						<tr align="center">
+							<th>공개 여부</th>
+							<td>
+								<select name="isSecret">
+									<option value="false">공개글
+									<option value="true">비밀글
+								</select>
+							</td>
+						</tr>
+					</table>
+					<input type="hidden" name="commentNo" value="${originComment.commentNo }">
+					<input type="hidden" name="noticeNo" value="${originComment.noticeNo }">
+                <div>
                     <button id="updateBtn" type="submit" class="btn btn-primary">수정</button>
-                </div>
+              
             </div>
         </form>
     </div>
