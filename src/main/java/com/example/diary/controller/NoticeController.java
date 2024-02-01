@@ -121,6 +121,7 @@ public class NoticeController {
     @GetMapping("/noticeList")
     public String noticeList(Model model,
                              @RequestParam(defaultValue = "1") int currentPage) {
+    	
         return noticeService.noticeList(model, currentPage);
     }
 	

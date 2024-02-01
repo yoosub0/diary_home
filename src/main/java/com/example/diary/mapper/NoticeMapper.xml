@@ -45,13 +45,12 @@
 			notice_no,
 			member_id,
 			comment,
-			is_secret,
-			createdate
+			is_secret
 		)	VALUES (
 			#{notice_no},
 			#{member_id},
 			#{comment},
-			'Y'
+			#{isSecret}
 		)
 	</insert>
 	

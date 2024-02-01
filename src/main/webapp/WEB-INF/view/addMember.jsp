@@ -27,10 +27,10 @@
 				data:{'idCk' : $('#idCk').val()},
 				success:function(json){
 					if(json == 0){
-						$('#idCkResult').text('아이디 사용가능')
+						$('#idCkResult').css('color', 'blue').text('아이디 사용가능');
 						$('#memberId').val($('#idCk').val())
 					}else{
-						$('#idCkResult').text('아이디 사용불가')
+						$('#idCkResult').css('color', 'red').text('아이디 사용불가')
 						$('#memberId').val('')
 						$('#idCk').val('')
 					}
@@ -109,6 +109,5 @@
             <button class="btn btn-outline-primary" id="btn" type="submit">가입하기</button>
             <a class="btn btn-outline-secondary" href="${pageContext.request.contextPath}/login">이전으로</a>  	
     </div>
-</div>
 </body>
 </html>

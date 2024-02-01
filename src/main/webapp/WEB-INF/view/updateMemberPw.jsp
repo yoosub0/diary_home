@@ -17,6 +17,14 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <style>
+        formsize {
+            max-width: 600px;
+			margin-top: 100px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
 	a {text-decoration: none;}
 	a:hover {text-decoration: underline;}
 	.center {text-align: center;}
@@ -41,7 +49,7 @@
         <form id="updateMemberPw" method="post" action="${pageContext.request.contextPath}/updateMemberPw">
         
         <input type="hidden" name="memberNo" value="${loginMember.memberNo}">
-            <table class="table table-bordered">
+		<table class="table table-bordered center">
                 <tr>
                     <th>현재 비밀번호</th>
                     <td><input type="password" class="form-control" id="oldPw" name="oldPw" required></td>

@@ -34,6 +34,7 @@ public class HomeController {
 	    Member loginMember = (Member)session.getAttribute("loginMember");
 	    int memberNo = loginMember.getMemberNo();
 	    String memberId = loginMember.getMemberId();
+	    int memberLevel = loginMember.getMemberLevel();
 	    
 		Map<String, Object> calendarMap = calendarService.getCalendar(targetYear, targetMonth);
 		model.addAttribute("calendarMap", calendarMap);

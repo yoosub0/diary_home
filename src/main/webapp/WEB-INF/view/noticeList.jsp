@@ -46,9 +46,10 @@
 	<br>
 	<table class="table text-center">
 		<tr>
-			<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
 			<td><h2 class="krFont">공지사항 목록</h2></td>
+			<c:if test="${loginMember.memberLevel==1}">
 			<td><a href="${pageContext.request.contextPath}/addNotice" class="btn btn-outline-primary krFont">공지 추가</a></td>
+			</c:if>
 		</tr>
 	</table>
 				
